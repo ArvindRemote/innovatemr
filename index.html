@@ -66,7 +66,7 @@
         // Determine if the device is a mobile device
         var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-        // If it's a mobile device, show the mobile overlay
+        // If it's a mobile device, enforce landscape mode and display the "Enable Full Screen" button
         if (isMobile) {
             var meta = document.createElement('meta');
             meta.name = 'viewport';
@@ -76,7 +76,6 @@
             canvas.className = "unity-mobile";
             canvas.style.width = "100%";
             canvas.style.height = "100%";
-            mobileOverlay.style.display = "block";
 
             // Add event listener for device orientation change
             window.addEventListener("orientationchange", function () {
@@ -95,6 +94,9 @@
             fullscreenEnableButton.addEventListener("click", function () {
                 enterFullScreen();
             });
+        } else {
+            // Hide the mobile overlay on non-mobile devices
+            mobileOverlay.style.display = "none";
         }
 
         loadingBar.style.display = "block";
